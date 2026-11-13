@@ -89,8 +89,10 @@ def main():
         batch = symbols[start:start + 40]
         yahoo = [s for _, s in batch]
         try:
+            # First load two years for new symbols; update existing symbols incrementally.
+            period = "5d" if all((DATA / f"{code}.csv").exists() for code, _ in batch) else "2y"
             data = yf.download(
-                tickers=yahoo, period="2y", interval="1d",
+                tickers=yahoo, period=period, interval="1d",
                 auto_adjust=True, group_by="ticker", threads=True,
                 progress=False, timeout=30
             )
