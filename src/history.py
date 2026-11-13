@@ -106,6 +106,22 @@ def main():
         except Exception:
             failed.extend(code for code, _ in batch)
         time.sleep(1.0)
+    # Taiwan Weighted Index benchmark for true relative-strength comparison.
+    try:
+        benchmark = yf.download("^TWII", period="2y", interval="1d", auto_adjust=True, progress=False, timeout=40)
+        if isinstance(benchmark.columns, pd.MultiIndex):
+            benchmark.columns = benchmark.columns.get_level_values(0)
+        if "Close" in benchmark.columns:
+            b = benchmark[["Close"]].rename(columns={"Close": "close"}).dropna()
+            b.index = pd.to_datetime(b.index).tz_localize(None)
+            b.index.name = "date"
+            Path("data").mkdir(exist_ok=True)
+            b.to_csv("data/benchmark_twii.csv", float_format="%.4f")
+        else:
+            raise RuntimeError("TAIEX benchmark Close field missing")
+    except Exception as exc:
+        raise RuntimeError(f"Unable to download ^TWII benchmark; RS scoring must not silently proceed: {exc}")
+
     summary = {
         "universe_count": int(len(universe)),
         "history_files_updated": int(ok),
