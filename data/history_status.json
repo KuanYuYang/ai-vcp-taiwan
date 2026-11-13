@@ -1,0 +1,8 @@
+{
+  "universe_count": 1985,
+  "history_files_updated": 1985,
+  "failed_or_empty": 0,
+  "provider": "Yahoo Finance via yfinance",
+  "adjusted_ohlc": true,
+  "history_window": "2y rolling"
+}
