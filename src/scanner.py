@@ -105,7 +105,7 @@ def score_series(df: pd.DataFrame, cfg: dict) -> dict | None:
     n = len(df)
     ma50, ma150, ma200 = c.rolling(50).mean().iloc[-1], c.rolling(150).mean().iloc[-1], c.rolling(200).mean().iloc[-1]
     price = c.iloc[-1]
-    trend = price > ma50 > ma150 > ma200 and ma50 > c.iloc[- deixou] if False else price > ma50 > ma150 > ma200
+    trend = price > ma50 > ma150 > ma200
     if not trend:
         trend_points = 0
     else:
