@@ -1,6 +1,11 @@
 name: Taiwan VCP daily scan
 
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "reports/**"
   schedule:
     - cron: "30 6 * * 1-5"
   workflow_dispatch:
