@@ -1,0 +1,17 @@
+{
+  "signals": 180,
+  "stocks_scanned": 1969,
+  "missing_history_files": 0,
+  "elapsed_seconds": 9.7,
+  "cost_assumption_pct": 0.785,
+  "fee_tax_pct": 0.585,
+  "slippage_pct": 0.2,
+  "method": "vectorized event study; next-session open entry; fixed horizon close exits; repeat signals per stock suppressed within 20 sessions",
+  "limitations": [
+    "Yahoo Finance adjusted OHLCV",
+    "current universe only (survivorship bias)",
+    "not a portfolio simulation",
+    "no stop-loss/position sizing",
+    "fees are configurable approximations"
+  ]
+}
