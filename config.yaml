@@ -1,0 +1,20 @@
+universe:
+  min_close_twd: 10
+  min_avg_value_20d_twd: 20000000
+  min_history_days: 220
+  # Exclude obvious fund/warrant-style codes; issuer-level security master will be added later.
+  exclude_code_prefixes: ["00", "020", "030", "040", "050", "060", "070", "080", "090"]
+
+vcp:
+  base_days: 60
+  segments: 3
+  min_contraction_pct: 3
+  max_contraction_pct: 35
+  contraction_tolerance: 1.15
+  volume_dryup_ratio: 0.75
+  breakout_volume_ratio: 1.5
+  pivot_lookback: 20
+  rs_lookback: 63
+
+report:
+  top_n: 50
