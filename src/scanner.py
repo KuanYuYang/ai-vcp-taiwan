@@ -25,10 +25,15 @@ def evaluate(df: pd.DataFrame, benchmark: pd.Series, cfg: dict):
     segments = int(cfg["vcp"]["segments"])
     width = base // segments
     depths = []
+    # Match the backtest: contraction base uses the prior sessions only,
+    # excluding the current signal/breakout day.
+    base_df = df.iloc[-base-1:-1]
+    if len(base_df) < base:
+        return None
     for i in range(segments):
-        start = -base + i * width
-        end = start + width if i < segments - 1 else None
-        window = df.iloc[start:end]
+        start = i * width
+        end = start + width if i < segments - 1 else base
+        window = base_df.iloc[start:end]
         if window.empty:
             return None
         peak, trough = float(window["high"].max()), float(window["low"].min())
