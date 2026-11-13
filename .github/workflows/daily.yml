@@ -33,7 +33,9 @@ jobs:
         run: python src/history.py
       - name: Run VCP scanner
         run: python src/scanner.py
-      - name: Run historical event study\n        run: python src/backtest.py\n      - name: Commit database and latest report
+      - name: Run historical event study
+        run: python src/backtest.py
+      - name: Commit database and latest report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
