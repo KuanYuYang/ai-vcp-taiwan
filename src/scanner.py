@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import json
-import math
-import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -199,7 +196,7 @@ def main():
         "",
         "## Snapshot preview",
         "",
-        report.head(30).to_markdown(index=False),
+        report.head(30).to_string(index=False),
     ]
     (out / "latest.md").write_text("\n".join(summary), encoding="utf-8")
     print("\n".join(summary[:8]))
