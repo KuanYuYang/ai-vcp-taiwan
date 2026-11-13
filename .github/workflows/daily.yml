@@ -2,7 +2,6 @@ name: Taiwan VCP daily scan
 
 on:
   schedule:
-    # 14:30 Taiwan time, after 13:30 close; GitHub schedule is UTC.
     - cron: "30 6 * * 1-5"
   workflow_dispatch:
 
@@ -16,31 +15,31 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 360
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Collect market snapshot
+      - name: Update two-year historical OHLCV
+        run: python src/history.py
+      - name: Run VCP scanner
         run: python src/scanner.py
-      - name: Commit latest report
+      - name: Commit database and latest report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/
+          git add data/ reports/
           if git diff --cached --quiet; then
-            echo "No report changes"
+            echo "No changes"
           else
-            git commit -m "chore: update Taiwan market snapshot"
+            git commit -m "data: update Taiwan OHLCV and VCP report"
             git push
           fi
-      - name: Upload daily report
+      - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: ai-vcp-report-${{ github.run_number }}
