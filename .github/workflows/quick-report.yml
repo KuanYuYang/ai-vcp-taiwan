@@ -1,0 +1,53 @@
+name: Taiwan VCP quick scan and backtest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/benchmark.py"
+      - ".github/workflows/quick-report.yml"
+      - "src/scanner.py"
+      - "src/backtest.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-vcp-quick-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Download TAIEX benchmark only
+        run: python src/benchmark.py
+      - name: Run VCP scanner
+        run: python src/scanner.py
+      - name: Run historical event study
+        run: python src/backtest.py
+      - name: Commit reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/benchmark_twii.csv reports/
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "report: run Taiwan VCP scan and backtest"
+            git push
+          fi
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-vcp-quick-report-${{ github.run_number }}
+          path: reports/
+          retention-days: 30
