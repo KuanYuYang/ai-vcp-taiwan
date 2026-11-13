@@ -99,7 +99,7 @@ def main():
                     "pivot": sig["pivot"], "base_low": sig["base_low"],
                 }
                 for h in horizons:
-                    exit_close = float(df["close"].iloc[i + h])
+                    exit_close = float(df["close"].iloc[i + 1 + h])
                     gross = exit_close / entry - 1
                     row[f"return_{h}d_gross_pct"] = gross * 100
                     row[f"return_{h}d_net_pct"] = (gross - total_cost) * 100
