@@ -1,6 +1,6 @@
-# AI-VCP Taiwan — 20261113
+# AI-VCP Taiwan — 20261116
 
-- Stocks evaluated: **1974**
+- Stocks evaluated: **1976**
 - Confirmed VCP breakouts: **0**
 - VCP watchlist: **0**
 - Relative strength is measured against ^TWII over 63 sessions.
