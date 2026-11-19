@@ -1,8 +1,8 @@
 # AI-VCP historical event study
 
 - Signals: **184**
-- Stocks scanned: **1971**
-- Elapsed: **8.9 seconds**
+- Stocks scanned: **1970**
+- Elapsed: **11.5 seconds**
 - Estimated round-trip cost: **0.785%**
 - Entry: next trading session open. Exit: close after the stated horizon.
 - This is an event study, not a portfolio backtest; survivorship bias remains.
