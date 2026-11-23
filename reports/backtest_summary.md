@@ -2,7 +2,7 @@
 
 - Signals: **185**
 - Stocks scanned: **1970**
-- Elapsed: **10.9 seconds**
+- Elapsed: **6.9 seconds**
 - Estimated round-trip cost: **0.785%**
 - Entry: next trading session open. Exit: close after the stated horizon.
 - This is an event study, not a portfolio backtest; survivorship bias remains.
