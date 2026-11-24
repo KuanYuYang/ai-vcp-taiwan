@@ -1,8 +1,8 @@
 {
   "signals": 185,
-  "stocks_scanned": 1970,
+  "stocks_scanned": 1971,
   "missing_history_files": 0,
-  "elapsed_seconds": 6.9,
+  "elapsed_seconds": 8.3,
   "cost_assumption_pct": 0.785,
   "fee_tax_pct": 0.585,
   "slippage_pct": 0.2,
