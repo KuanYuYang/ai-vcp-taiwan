@@ -1,4 +1,4 @@
-# AI-VCP Taiwan — 20261126
+# AI-VCP Taiwan — 20261127
 
 - Stocks evaluated: **1978**
 - Confirmed VCP breakouts: **0**
